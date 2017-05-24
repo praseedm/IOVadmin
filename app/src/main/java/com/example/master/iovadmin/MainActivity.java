@@ -8,7 +8,6 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -20,7 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -65,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void showMarkers() {
-        String gKey = "current_location";
+        String gKey = "location_data/pteF8V9oxhaspHMmKwm0M1kM7NE3";
         locRef = database.child(gKey);
         markerListener = new ChildEventListener() {
             @Override
@@ -103,12 +101,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void updateMarker(LocationObj mLastlocationObj) {
         Log.d(TAG, "updateMarker: "+marker_list.size());
         if(mLastlocationObj.getmLastTime() != null)
-        {   String user = mLastlocationObj.getmUser();
+        {   String vehicleNum = mLastlocationObj.getmVehicleNum();
             int pos = 0;
             boolean test = false;
             for (int i = 0; i< marker_list.size(); i++) {
                 Marker check = marker_list.get(i);
-                test = check.getTitle().equals(user);
+                test = check.getTitle().equals(vehicleNum);
                 if(test){
                     Log.d(TAG, "updateMarker: ");
                     pos = i;
@@ -134,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .position(position)
                 .title(mLastlocationObj.getmLastTime())///to change
                 .snippet(mLastlocationObj.getmLastTime()));
-       /* if(mLastlocationObj.getmUser().equals(mFbUser.getDisplayName())){
+       /* if(mLastlocationObj.getmVehicleNum().equals(mFbUser.getDisplayName())){
             marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.userm));
             if(zoom){
                 mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(position , 9) );
