@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void showMarkers() {
-        String gKey = "location_data/pteF8V9oxhaspHMmKwm0M1kM7NE3";
+        String gKey = "location_data/wRLEYHpuZvQCrLiQcojzyN36pci1";
         locRef = database.child(gKey);
         markerListener = new ChildEventListener() {
             @Override
@@ -188,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void setUpMap() {
+        LatLng pos = new LatLng(10.7849907,75.9377606);
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -201,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setMyLocationEnabled(true);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.getUiSettings().setMapToolbarEnabled(false);
+        mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(pos , 10) );
     }
 
     private void setUpMapIfNeeded() {
