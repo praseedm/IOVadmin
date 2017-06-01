@@ -16,7 +16,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBQoEpVOBoUNFzTHZVDHK9lSvLudbjqt1A" />
 
-        <activity android:name=".SplashActivity"
+        <activity
+            android:name=".SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,8 +25,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:launchMode="singleTask"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask" />
+
+        <activity android:name=".ListActivity"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>
