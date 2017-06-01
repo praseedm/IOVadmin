@@ -5,6 +5,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -60,6 +62,29 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onDestroy() {
         super.onDestroy();
         removeMarkers();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.menu_exit:
+                finish();
+                break;
+            case R.id.menu_list:
+                startDetailActivity();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void startDetailActivity() {
     }
 
     private void showMarkers() {
